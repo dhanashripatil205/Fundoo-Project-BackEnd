@@ -7,9 +7,9 @@ import * as NoteService from '../services/note.service';
  * @param {object} res - response object
  * @param {Function} next
  */
-export const getallUsers = async (req, res, next) => {
+export const getallNotes = async (req, res, next) => {
   try {
-    const data = await NoteService.getallUsers();
+    const data = await NoteService.getallNotes();
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: data,
