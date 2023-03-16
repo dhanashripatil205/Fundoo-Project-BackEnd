@@ -6,7 +6,7 @@ import { userAuth } from '../middlewares/auth.middleware';
 const router = express.Router();
 
 //route to get all notes
-router.get('/', noteController.getallUsers);
+router.get('/', noteController.getallNotes);
 
 //route to create a new note
 router.post(' ', noteValidator,userAuth, noteController.createnewNote);
