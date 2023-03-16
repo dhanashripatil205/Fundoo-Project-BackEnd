@@ -2,7 +2,26 @@ import HttpStatus from 'http-status-codes';
 import * as NoteService from '../services/note.service';
 
 /**
- * Controller to get a single user
+ * Controller to get all notes available
+ * @param  {object} req - request object
+ * @param {object} res - response object
+ * @param {Function} next
+ */
+export const getallUsers = async (req, res, next) => {
+  try {
+    const data = await NoteService.getallUsers();
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: data,
+      message: 'All users fetched successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Controller to get a single note
  * @param  {object} req - request object
  * @param {object} res - response object
  * @param {Function} next
@@ -21,7 +40,7 @@ export const getnewNote = async (req, res, next) => {
 };
 
 /**
- * Controller to create a new user
+ * Controller to create a new note
  * @param  {object} req - request object
  * @param {object} res - response object
  * @param {Function} next
@@ -46,7 +65,7 @@ export const createnewNote = async (req, res, next) => {
 };
 
 /**
- * Controller to update a user
+ * Controller to update a note
 //  * @param  {object} req - request object
 //  * @param {object} res - response object
 //  * @param {Function} next
@@ -65,7 +84,7 @@ export const updateNote = async (req, res, next) => {
 };
 
 /**
- * Controller to delete a user
+ * Controller to delete a note
  * @param  {object} req - request object
  * @param {object} res - response object
  * @param {Function} next
