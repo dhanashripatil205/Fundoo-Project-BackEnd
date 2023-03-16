@@ -1,5 +1,10 @@
 import Note from '../models/note.model';
 
+//get all users
+export const getallUsers = async () => {
+  const data = await Note.find();
+  return data;
+};
 //create new Note
 export const createnewNote = async (body) => {
   const data = await Note.create(body);
