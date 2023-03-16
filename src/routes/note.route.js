@@ -5,16 +5,19 @@ import { userAuth } from '../middlewares/auth.middleware';
 
 const router = express.Router();
 
+//route to get all users
+router.get('/', noteController.getallUsers);
+
 //route to create a new user
-router.post('/createnote', noteValidator, noteController.createnewNote);
+router.post(' ', noteValidator,userAuth, noteController.createnewNote);
 
 //route to get a single user by their user id
-router.get('/:_id', noteController.getnewNote);
+router.get('/:_id', userAuth, noteController.getnewNote);
 
 //route to update a single user by their user id
-router.put('/:_id', noteController.updateNote);
+router.put('/:_id', userAuth, noteController.updateNote);
 
 //route to delete a single user by their user id
-router.delete('/:_id', noteController.deleteNote);
+router.delete('/:_id', userAuth,noteController.deleteNote);
 
 export default router;
