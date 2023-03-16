@@ -1,7 +1,7 @@
 import Note from '../models/note.model';
 
-//get all users
-export const getallUsers = async () => {
+//get all notes
+export const getallNotes = async () => {
   const data = await Note.find();
   return data;
 };
