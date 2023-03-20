@@ -22,10 +22,8 @@ export const userAuth = async (req, res, next) => {
     bearerToken = bearerToken.split(' ')[1];
 
     const secret_key = process.env.SECRET_KEY;
-    console.log('This is the secret key----->', secret_key);
 
-    const user = await jwt.verify(bearerToken, secret_key); //email /id
-    //console.log('User details after token verification--------->', user._id); //
+    const user = await jwt.verify(bearerToken, secret_key);
 
     req.body.userId = user._id;
 
