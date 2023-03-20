@@ -41,7 +41,7 @@ export const deleteNote = async (id) => {
 };
 
 
-//add note from trash
+//add note in trash
 export const addNoteInTrash = async (_id) => {
   const data = await Note.findOneAndUpdate(
     {
@@ -49,7 +49,7 @@ export const addNoteInTrash = async (_id) => {
     },
     
     {
-      trash: 'true',
+      trash: true,
     },
     {
       new:true
@@ -58,7 +58,7 @@ export const addNoteInTrash = async (_id) => {
    return data;
 };
 
-//add note from trash
+//Remove note from trash
 export const removeNoteFromTrash = async (_id) => {
   const data = await Note.findOneAndUpdate(
     {
@@ -66,7 +66,7 @@ export const removeNoteFromTrash = async (_id) => {
     },
     
     {
-      trash: 'false',
+      trash: false,
     },
     {
       new:true
@@ -77,7 +77,7 @@ export const removeNoteFromTrash = async (_id) => {
 
 
 
-//add and remove note from archive
+//add note in archive
 export const addNoteInArchive = async (_id) => {
   const data = await Note.findOneAndUpdate(
     {
@@ -85,7 +85,7 @@ export const addNoteInArchive = async (_id) => {
     },
     
     {
-      archieve: 'true'
+      archieve: true
     },
 
     {
@@ -94,7 +94,7 @@ export const addNoteInArchive = async (_id) => {
   return data;
 };
 
-//add and remove note from archive
+//remove note from archive
 export const removeNoteFromArchive = async (_id) => {
   const data = await Note.findOneAndUpdate(
     {
@@ -102,7 +102,7 @@ export const removeNoteFromArchive = async (_id) => {
     },
     
     {
-      archieve: 'false'
+      archieve: false
     },
 
     {
