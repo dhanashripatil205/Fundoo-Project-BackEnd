@@ -1,0 +1,529 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": " Fundoo Notes ",
+    "description": "This is the replica of Fundoo Notes.User can register and login , User can do request for forgot password and he can reset password using that shared credentionals . User can loging and perform node CRUD."
+  },
+  "host": "localhost:4000",
+  "basePath": "/api/v1/",
+  "tags": [
+    {
+      "name": "Google keep using express CLI",
+      "description": "This is the replica of google keep"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "description": "User Registration",
+        "parameters": [
+          {
+            "name": "Register new name",
+            "in": "body",
+            "description": "Register user",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          },
+          "500": {
+            "description": "Bad request"
+          },
+          "400": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/users/login": {
+      "post": {
+        "tags": ["User"],
+        "description": "User login",
+        "parameters": [
+          {
+            "name": "login user",
+            "in": "body",
+            "description": "User login",
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "sucessfully logged in"
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/users/forgetPwd": {
+      "post": {
+        "tags": ["User"],
+        "description": "forgotpassword",
+        "parameters": [
+          {
+            "name": "forgotpassword",
+            "in": "body",
+            "description": "forgotpassword",
+            "schema": {
+              "$ref": "#/definitions/forgotpass"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Forgot Password."
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/users/resetPwd/{token}": {
+      "post": {
+        "tags": ["User"],
+        "description": "resetpassword",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "resetpassword",
+            "in": "body",
+            "description": "resetpassword",
+            "schema": {
+              "$ref": "#/definitions/resetpassword"
+            }
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "token"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Password has been reseted."
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/notes": {
+      "get": {
+        "tags": ["Note"],
+        "description": "getAllNotes",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Get all the notes."
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+
+      "post": {
+        "tags": ["Note"],
+        "description": "createNote",
+        "parameters": [
+          {
+            "name": "createNote",
+            "in": "body",
+            "description": "createNote",
+            "schema": {
+              "$ref": "#/definitions/notes"
+            }
+          }
+        ],
+
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "sucessfully logged in"
+          },
+          "404": {
+            "description": "email or password doesn't match"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/notes/{_id}": {
+      "get": {
+        "tags": ["Note"],
+        "description": "getNoteById",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Get note by ID"
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+
+      "put": {
+        "tags": ["Note"],
+        "description": "updateNoteById",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "Update Note",
+            "in": "body",
+            "description": "Update Note",
+
+            "schema": {
+              "$ref": "#/definitions/notes"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Note Updated sucessfully in record"
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+
+      "delete": {
+        "tags": ["Note"],
+        "description": "deleteNoteById",
+
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Note Deleted Successfully from record."
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/notes/{_id}/addNoteInTrash": {
+      "put": {
+        "tags": ["Note"],
+        "description": "addNoteInTrash",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Changed the Notes Trash status successfully from False to True"
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/notes/{_id}/removeNoteFromTrash": {
+      "put": {
+        "tags": ["Note"],
+        "description": "removeNoteFromTrash",
+
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Changed the Notes Trash status successfully from True to False"
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/notes/{_id}/addNoteInArchive": {
+      "put": {
+        "tags": ["Note"],
+        "description": "addNoteInArchive",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Changed the Notes Archive status successfully from False to True."
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/notes/{_id}/removeNoteFromArchive": {
+      "put": {
+        "tags": ["Note"],
+        "description": "removeNoteFromArchive",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Changed the Notes Archive status successfully from True to False."
+          },
+          "404": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+
+
+
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "confirmpassword": {
+          "type": "string"
+        }
+      }
+    },
+
+    "notes": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "archieve": {
+          "type": "string"
+        },
+        "trash": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+
+
+    "login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "forgotpass": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "resetpassword": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "confirmpassword": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
